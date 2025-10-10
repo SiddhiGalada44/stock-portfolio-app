@@ -1,0 +1,73 @@
+/* A new container for the whole app including the top bar */
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* The container for the sidebar and main content */
+.layout-container {
+  display: flex;
+  flex-grow: 1; /* Allows this section to fill the remaining height */
+  background-color: var(--background-dark);
+}
+
+.sidebar {
+  width: 250px;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--background-light);
+  border-right: 1px solid var(--border-color);
+}
+
+.sidebar-header h2 {
+  margin: 0 0 2rem 0;
+  text-align: center;
+  color: var(--primary-color);
+}
+
+.sidebar-nav a {
+  display: block;
+  text-decoration: none;
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  margin-bottom: 0.5rem;
+  color: var(--text-secondary);
+}
+
+.sidebar-nav a:hover {
+  background-color: var(--background-card);
+  color: var(--text-primary);
+}
+
+.sidebar-nav a.active {
+  font-weight: bold;
+  background-color: var(--primary-color);
+  color: var(--text-primary);
+}
+
+.main-content {
+  flex-grow: 1;
+  padding: 2rem;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.logout-button {
+  margin-top: auto;
+  width: 100%;
+  border: none;
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  color: var(--text-primary);
+  background-color: var(--danger-color);
+}
+
+.logout-button:hover {
+  background-color: var(--danger-hover);
+}

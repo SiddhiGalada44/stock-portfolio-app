@@ -1,0 +1,28 @@
+/* src/components/MarketBar.css */
+
+.market-bar {
+  display: flex;
+  background-color: var(--background-card);
+  border-bottom: 1px solid var(--border-color);
+  overflow-x: auto; /* Allows horizontal scrolling on small screens */
+  white-space: nowrap;
+}
+
+.ticker-item {
+  padding: 0.75rem 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  border-right: 1px solid var(--border-color);
+}
+
+.ticker-name {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.ticker-price {
+  font-size: 1rem;
+  font-weight: bold;
+  color: var(--text-primary);
+}

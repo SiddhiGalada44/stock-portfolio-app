@@ -1,0 +1,34 @@
+/* src/index.css */
+
+/* Define the color theme for the entire application */
+:root {
+  --primary-color: #007bff;
+  --primary-hover: #0056b3;
+  --background-dark: #121212;
+  --background-light: #1e1e1e;
+  --background-card: #242424;
+  --text-primary: #ffffff;
+  --text-secondary: #aaa;
+  --border-color: #333;
+  --danger-color: #dc3545;   
+  --danger-hover: #c82333;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background-color: var(--background-dark);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Make all transitions smooth by default */
+a, button {
+  transition: all 0.2s ease-in-out;
+}
+
+/* Remove default button styling that we'll override elsewhere */
+button {
+  font-family: inherit;
+}
