@@ -2,128 +2,292 @@
 
 .dashboard-container {
   width: 100%;
-  max-width: 900px;
+  max-width: 1000px;
+  animation: fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* NEW: Styles for the summary card */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Modern glassmorphic summary card */
 .portfolio-summary {
-  background: linear-gradient(45deg, #007bff, #0056b3);
+  background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
   color: white;
-  padding: 2rem;
-  border-radius: 12px;
+  padding: 2.5rem;
+  border-radius: 20px;
   text-align: center;
-  margin-bottom: 2rem;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  margin-bottom: 2.5rem;
+  box-shadow: var(--shadow-xl), var(--shadow-glow);
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.portfolio-summary::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+  animation: shimmer 8s infinite linear;
+}
+
+@keyframes shimmer {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.portfolio-summary:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-xl), 0 0 40px rgba(99, 102, 241, 0.4);
 }
 
 .portfolio-summary h2 {
   margin: 0;
-  font-size: 1.25rem;
-  font-weight: 500;
+  font-size: 1rem;
+  font-weight: 600;
   opacity: 0.9;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  position: relative;
+  z-index: 1;
 }
 
 .portfolio-summary .total-value {
-  margin: 0.5rem 0 0;
-  font-size: 3rem;
-  font-weight: 700;
+  margin: 1rem 0 0;
+  font-size: 3.5rem;
+  font-weight: 800;
+  position: relative;
+  z-index: 1;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
 }
 
-/* --- Form Styles --- */
+/* --- Modern Form Styles --- */
 .add-stock-form {
-  background-color: #242424;
-  padding: 1.5rem;
-  border-radius: 8px;
-  margin-bottom: 2rem;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background: var(--glass-background);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  padding: 2rem;
+  border-radius: 20px;
+  margin-bottom: 2.5rem;
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--glass-border);
+  transition: all 0.3s ease;
+}
+
+.add-stock-form:hover {
+  box-shadow: var(--shadow-xl);
+  border-color: var(--border-light);
 }
 
 .add-stock-form h2 {
-  margin-top: 0;
+  margin: 0 0 1.5rem 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
 }
 
 .form-row {
   display: flex;
   gap: 1rem;
   align-items: flex-end;
+  flex-wrap: wrap;
 }
 
 .form-row .form-group {
-  flex-grow: 1;
+  flex: 1;
+  min-width: 200px;
+}
+
+.form-autocomplete-container {
+  position: relative;
 }
 
 /* --- Portfolio List Styles --- */
 .portfolio-list h2 {
-  border-bottom: 1px solid #333;
-  padding-bottom: 0.5rem;
-  margin-bottom: 1rem;
+  border-bottom: 2px solid var(--border-light);
+  padding-bottom: 1rem;
+  margin-bottom: 2rem;
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--text-primary);
 }
 
-/* UPDATED: Changed to a grid layout to handle more data */
+/* Modern stock cards with glassmorphism */
 .stock-item {
   display: grid;
-  grid-template-columns: 1.5fr 1fr 1fr auto; 
+  grid-template-columns: 1.5fr 1fr 1.5fr auto;
   align-items: center;
-  gap: 1.5rem;
-  grid-template-columns: 1fr 1fr auto;
-  align-items: center;
-  gap: 1.5rem;
-  background-color: #242424;
-  padding: 1.5rem;
-  border-radius: 8px;
-  margin-bottom: 1rem;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s ease-in-out;
+  gap: 2rem;
+  background: var(--glass-background);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  padding: 2rem;
+  border-radius: 20px;
+  margin-bottom: 1.5rem;
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--glass-border);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.stock-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(99, 102, 241, 0.1), transparent);
+  transition: left 0.6s ease;
 }
 
 .stock-item:hover {
-  transform: translateY(-3px);
+  transform: translateY(-5px) scale(1.01);
+  box-shadow: var(--shadow-xl);
+  border-color: var(--border-light);
+}
+
+.stock-item:hover::before {
+  left: 100%;
 }
 
 .stock-info {
   display: flex;
   flex-direction: column;
+  gap: 0.5rem;
 }
 
 .stock-ticker {
-  font-size: 1.75rem;
-  font-weight: bold;
+  font-size: 2rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--primary-light), var(--accent-color));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -0.5px;
 }
 
 .stock-trends {
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 0.5rem;
 }
 
 .stock-info span:last-child {
-  font-size: 1rem;
-  color: #aaa;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  font-weight: 500;
 }
 
 .stock-value {
   display: flex;
   flex-direction: column;
   text-align: right;
+  gap: 0.5rem;
+}
+
+.stock-value span:first-child {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  font-weight: 500;
 }
 
 .stock-value .total-value {
-  font-size: 1.5rem;
-  font-weight: bold;
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: var(--success-color);
+  text-shadow: 0 0 10px rgba(16, 185, 129, 0.3);
+}
+
+.stock-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.details-button,
+.delete-button {
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.details-button {
+  background: linear-gradient(135deg, var(--info-color), #2563eb);
+  color: white;
+  box-shadow: var(--shadow-sm);
+}
+
+.details-button:hover {
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
 }
 
 .delete-button {
-  background-color: #dc3545;
+  background: linear-gradient(135deg, var(--danger-color), #dc2626);
   color: white;
-  border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.2s;
+  box-shadow: var(--shadow-sm);
 }
 
 .delete-button:hover {
-  background-color: #c82333;
+  background: linear-gradient(135deg, var(--danger-hover), #b91c1c);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.details-button:active,
+.delete-button:active {
+  transform: translateY(0);
+}
+
+/* Responsive grid */
+@media (max-width: 968px) {
+  .stock-item {
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+
+  .stock-actions {
+    grid-column: 1 / -1;
+    flex-direction: row;
+    justify-content: flex-end;
+  }
+}
+
+@media (max-width: 640px) {
+  .stock-item {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .stock-value {
+    text-align: left;
+  }
 }
 
 /* The semi-transparent backdrop that covers the whole screen */

@@ -29,7 +29,7 @@ function Layout({ children }) {
             <NavLink to="/">Dashboard</NavLink>
           </nav>
           <button onClick={handleLogout} className="logout-button">
-            Logout 🚪
+            Logout
           </button>
         </aside>
         <main className="main-content">

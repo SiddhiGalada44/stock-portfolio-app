@@ -1,69 +1,83 @@
 // src/pages/RegisterPage.jsx
 
 import React, { useState } from 'react';
-import axios from 'axios'; // Make sure you've run 'npm install axios'
+import { useNavigate, Link } from 'react-router-dom';
+import axios from 'axios';
+import toast from 'react-hot-toast';
 import './RegisterPage.css';
+
 function RegisterPage() {
-  // Create state variables to hold the username and password
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate();
 
-  // This function will be called when the form is submitted
   const handleSubmit = async (event) => {
-    // Prevent the default form submission behavior (which reloads the page)
     event.preventDefault();
 
     try {
-      // The API endpoint for registration on your backend
-      const url = 'http://localhost:5001/api/auth/register'; // Use port 5001 if you changed it
-
-      // The data we want to send, matching the backend's expectations
+      const url = 'http://localhost:5001/api/auth/register';
       const userData = { username, password };
-
-      // Make the POST request using axios
       const response = await axios.post(url, userData);
 
-      // Handle the response from the server
-      toast.success('Registration successful!');  // Show a success message
-      // You could also redirect the user to the login page here
+      toast.success('Registration successful! Please login to continue.', {
+        duration: 4000,
+      });
+
+      // Redirect to login page after successful registration
+      setTimeout(() => {
+        navigate('/login');
+      }, 1500);
 
     } catch (error) {
-      // Handle any errors that occur during the request
-      const message = error.response?.data?.message || 'Registration failed.';
-      toast.error(message); // <-- 2. Replace alert()
+      const message = error.response?.data?.message || 'Registration failed. Please try again.';
+      toast.error(message);
     }
   };
 
   return (
     <div className="form-container">
-      <form onSubmit={handleSubmit} className="auth-form">
-        <h1>Register</h1>
-        <div className="form-group">
-          <label htmlFor="username">Username</label>
-          <input
-            id="username"
-            type="text"
-            className="form-input"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            required
-          />
+      <div className="form-container-inner">
+        <div className="form-welcome">
+          <h2>Create Your Account</h2>
+          <p>Join Portfolio Tracker to manage your investments and track your financial growth in real-time.</p>
         </div>
-        <div className="form-group">
-          <label htmlFor="password">Password</label>
-          <input
-            id="password"
-            type="password"
-            className="form-input"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </div>
-        <button type="submit" className="form-button">
-          Register
-        </button>
-      </form>
+
+        <form onSubmit={handleSubmit} className="auth-form">
+          <h1>Register</h1>
+          <div className="form-group">
+            <label htmlFor="username">Username</label>
+            <input
+              id="username"
+              type="text"
+              className="form-input"
+              placeholder="Choose a username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="password">Password</label>
+            <input
+              id="password"
+              type="password"
+              className="form-input"
+              placeholder="Create a secure password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+              minLength="6"
+            />
+          </div>
+          <button type="submit" className="form-button">
+            Create Account
+          </button>
+
+          <div className="form-footer">
+            Already have an account? <Link to="/login">Sign in here</Link>
+          </div>
+        </form>
+      </div>
     </div>
   );
 }
